@@ -1,0 +1,26 @@
+{
+  "name": "mytory/wp-mytory-like",
+  "description": "워드프레스에 좋아요 기능을 추가한다.",
+  "version": "1.0",
+  "keywords": [
+    "wordpress",
+    "like"
+  ],
+  "authors": [
+    {
+      "name": "An, Hyeong-woo",
+      "email": "mytory@gmail.com"
+    }
+  ],
+  "repositories": [
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=7.0",
+  },
+  "autoload": {
+    "psr-4": {
+      "Mytory\\Like\\": "src/"
+    }
+  }
+}
