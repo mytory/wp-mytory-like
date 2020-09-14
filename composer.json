@@ -1,7 +1,7 @@
 {
   "name": "mytory/wp-mytory-like",
   "description": "워드프레스에 좋아요 기능을 추가한다.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [
     "wordpress",
     "like"
