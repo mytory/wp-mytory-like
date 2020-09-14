@@ -1,11 +1,15 @@
 <?php
 namespace Mytory\Like;
+use Mytory\AjaxVariable\MytoryAjaxVariable;
+
 /**
  * Mytory Board의 확장팩 성격의 좋아요 모듈.
  * Class MytoryLike
  */
 class MytoryLike {
 	public function __construct() {
+		new MytoryAjaxVariable();
+
 		add_action( 'wp_ajax_change_like_count', [ $this, 'change' ] );
 		add_action( 'wp_ajax_nopriv_change_like_count', [ $this, 'change' ] );
 	}
@@ -35,5 +39,3 @@ class MytoryLike {
 	}
 
 }
-
-new MytoryLike();
