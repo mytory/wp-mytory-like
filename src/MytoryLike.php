@@ -6,22 +6,8 @@ namespace Mytory\Like;
  */
 class MytoryLike {
 	public function __construct() {
-		add_action( 'wp_head', [ $this, 'globalJsVariable' ] );
-
 		add_action( 'wp_ajax_change_like_count', [ $this, 'change' ] );
 		add_action( 'wp_ajax_nopriv_change_like_count', [ $this, 'change' ] );
-	}
-
-	public function globalJsVariable() {
-		global $wp_query;
-		?>
-		<script type="text/javascript">
-            window.mytory_like = {
-                ajax_url: <?= json_encode( admin_url( "admin-ajax.php" ) ); ?>,
-                ajax_nonce: <?= json_encode( wp_create_nonce( "mytory-like-ajax-nonce" ) ); ?>,
-                wp_debug: <?= defined( WP_DEBUG ) ? WP_DEBUG : 'false' ?>
-            };
-		</script><?php
 	}
 
 	public function change() {

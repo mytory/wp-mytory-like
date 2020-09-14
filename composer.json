@@ -1,7 +1,7 @@
 {
   "name": "mytory/wp-mytory-like",
   "description": "워드프레스에 좋아요 기능을 추가한다.",
-  "version": "1.0",
+  "version": "1.0.1",
   "keywords": [
     "wordpress",
     "like"
@@ -13,10 +13,15 @@
     }
   ],
   "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/mytory/wp-mytory-ajax-variable.git"
+    }
   ],
   "type": "library",
   "require": {
-    "php": ">=7.0"
+    "php": ">=7.0",
+    "mytory/wp-mytory-ajax-variable": "^1.0"
   },
   "autoload": {
     "psr-4": {
