@@ -31,7 +31,7 @@ new Vue({
         },
         changeLikeCount(postId, likeCount) {
             axios({
-               url: window.mytory_like.ajax_url,
+               url: window.mytory_ajax.ajax_url,
                method: 'post',
                params: {
                    action: 'change_like_count',
