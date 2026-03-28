@@ -15,25 +15,34 @@ class MytoryLike {
 	}
 
 	public function change() {
-		$like_count = get_post_meta( $_REQUEST['ID'], '_mytory_like_count', true ) ?: 0;
-		$like_count += $_REQUEST['like_count'];
-
-		// 음수방지
-		$like_count = max( $like_count, 0 );
-
-		if ( update_post_meta( $_REQUEST['ID'], '_mytory_like_count', $like_count ) ) {
-			echo json_encode( [
-				'result'    => 'success',
-				'message'   => '좋아요 ' . $_REQUEST['count'],
-				'likeCount' => $like_count,
-			] );
-		} else {
+		// 1. 보안 검증: Nonce 체크 (실패 시 친절한 메시지 반환)
+		if ( ! check_ajax_referer( 'mytory_like_nonce', 'nonce', false ) ) {
 			echo json_encode( [
 				'result'    => 'error',
-				'message'   => '오류가 발생했습니다.',
-				'likeCount' => $like_count,
+				'message'   => '보안 세션이 만료되었거나 올바르지 않은 접근입니다. 페이지를 새로고침한 후 다시 시도해 주세요.',
 			] );
+			die();
 		}
+
+		// 2. 데이터 정제 및 오타 수정
+		$post_id    = absint( $_REQUEST['ID'] );
+		$diff       = (int) $_REQUEST['like_count'];
+		
+		$like_count = get_post_meta( $post_id, '_mytory_like_count', true ) ?: 0;
+		$like_count += $diff;
+
+		// 음수 방지
+		$like_count = max( $like_count, 0 );
+
+		// 3. 업데이트 및 결과 확인
+		update_post_meta( $post_id, '_mytory_like_count', $like_count );
+		$final_count = get_post_meta( $post_id, '_mytory_like_count', true );
+
+		echo json_encode( [
+			'result'    => 'success',
+			'message'   => '좋아요 ' . $diff,
+			'likeCount' => (int) $final_count,
+		] );
 
 		die();
 	}
