@@ -2,6 +2,8 @@
         data-post-id="<?php echo get_the_ID() ?>"
         data-like-count="<?= get_post_meta(get_the_ID(), '_mytory_like_count', true) ?: 0 ?>"
         data-nonce="<?= wp_create_nonce('mytory_like_nonce') ?>"
+        :disabled="loading"
+        :style="{ opacity: loading ? 0.5 : 1 }"
         @click="toggle">
     <svg class="c-icon-button" :fill="alreadyLiked ? 'red' : 'black'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
     <span v-show="likeCount === 0">
